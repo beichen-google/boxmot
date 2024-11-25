@@ -14,7 +14,179 @@
 <a href="https://hub.docker.com/r/boxmot/boxmot"><img src="https://img.shields.io/docker/pulls/boxmot/boxmot?logo=docker" alt="Ultralytics Docker Pulls"></a>
 
   </div>
+
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- \`xmin\`: The x-coordinate of the top-left corner of the bounding box.
+- \`ymin\`: The y-coordinate of the top-left corner of the bounding box.
+- \`xmax\`: The x-coordinate of the bottom-right corner of the bounding box.
+- \`ymax\`: The y-coordinate of the bottom-right corner of the bounding box.
+- \`confidence\`: The confidence score of the detection.
+- \`class_id\`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
+
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- `xmin`: The x-coordinate of the top-left corner of the bounding box.
+- `ymin`: The y-coordinate of the top-left corner of the bounding box.
+- `xmax`: The x-coordinate of the bottom-right corner of the bounding box.
+- `ymax`: The y-coordinate of the bottom-right corner of the bounding box.
+- `confidence`: The confidence score of the detection.
+- `class_id`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
 </div>
+
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- \`xmin\`: The x-coordinate of the top-left corner of the bounding box.
+- \`ymin\`: The y-coordinate of the top-left corner of the bounding box.
+- \`xmax\`: The x-coordinate of the bottom-right corner of the bounding box.
+- \`ymax\`: The y-coordinate of the bottom-right corner of the bounding box.
+- \`confidence\`: The confidence score of the detection.
+- \`class_id\`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
+
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- `xmin`: The x-coordinate of the top-left corner of the bounding box.
+- `ymin`: The y-coordinate of the top-left corner of the bounding box.
+- `xmax`: The x-coordinate of the bottom-right corner of the bounding box.
+- `ymax`: The y-coordinate of the bottom-right corner of the bounding box.
+- `confidence`: The confidence score of the detection.
+- `class_id`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
 
 ## Introduction
 
@@ -38,6 +210,92 @@ This repo contains a collections of pluggable state-of-the-art multi-object trac
 <sub> NOTES: The evaluation was conducted on the second half of the MOT17 training set, as the validation set is not publicly accessible. The pre-generated detections and embeddings used, were sourced from [here](https://drive.google.com/drive/folders/1zzzUROXYXt8NjxO1WUcwSzqD-nn7rPNr). Each tracker was configured with the original parameters provided in their official repositories. </sub>
 
 </div>
+
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- \`xmin\`: The x-coordinate of the top-left corner of the bounding box.
+- \`ymin\`: The y-coordinate of the top-left corner of the bounding box.
+- \`xmax\`: The x-coordinate of the bottom-right corner of the bounding box.
+- \`ymax\`: The y-coordinate of the bottom-right corner of the bounding box.
+- \`confidence\`: The confidence score of the detection.
+- \`class_id\`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
+
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- `xmin`: The x-coordinate of the top-left corner of the bounding box.
+- `ymin`: The y-coordinate of the top-left corner of the bounding box.
+- `xmax`: The x-coordinate of the bottom-right corner of the bounding box.
+- `ymax`: The y-coordinate of the bottom-right corner of the bounding box.
+- `confidence`: The confidence score of the detection.
+- `class_id`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
 
 </details>
 
@@ -122,7 +380,7 @@ $ python tracking/track.py --source 0                               # webcam
 <details>
 <summary>Select ReID model</summary>
 
-Some tracking methods combine appearance description and motion in the process of tracking. For those which use appearance, you can choose a ReID model based on your needs from this [ReID model zoo](https://kaiyangzhou.github.io/deep-person-reid/MODEL_ZOO). These model can be further optimized for you needs by the [reid_export.py](https://github.com/mikel-brostrom/yolo_tracking/blob/master/boxmot/appearance/reid_export.py) script
+Some tracking methods combine appearance description and motion in the process of tracking. For those which use appearance, you can choose a ReID model based on your needs from this [ReID model zoo](https://kaiyangzhou.github.io/deep-person-reid/MODEL_ZOO). These model can be further optimized for you needs by the [reid_export.py](https://github.com/beichen-google/boxmot/blob/master/boxmot/appearance/reid_export.py) script
 
 ```bash
 $ python tracking/track.py --source 0 --reid-model lmbn_n_cuhk03_d.pt               # lightweight
@@ -216,13 +474,186 @@ The set of hyperparameters leading to the best HOTA result are written to the tr
 
 </div>
 
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- \`xmin\`: The x-coordinate of the top-left corner of the bounding box.
+- \`ymin\`: The y-coordinate of the top-left corner of the bounding box.
+- \`xmax\`: The x-coordinate of the bottom-right corner of the bounding box.
+- \`ymax\`: The y-coordinate of the bottom-right corner of the bounding box.
+- \`confidence\`: The confidence score of the detection.
+- \`class_id\`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
+
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- \`xmin\`: The x-coordinate of the top-left corner of the bounding box.
+- \`ymin\`: The y-coordinate of the top-left corner of the bounding box.
+- \`xmax\`: The x-coordinate of the bottom-right corner of the bounding box.
+- \`ymax\`: The y-coordinate of the bottom-right corner of the bounding box.
+- \`confidence\`: The confidence score of the detection.
+- \`class_id\`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
+
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- `xmin`: The x-coordinate of the top-left corner of the bounding box.
+- `ymin`: The y-coordinate of the top-left corner of the bounding box.
+- `xmax`: The x-coordinate of the bottom-right corner of the bounding box.
+- `ymax`: The y-coordinate of the bottom-right corner of the bounding box.
+- `confidence`: The confidence score of the detection.
+- `class_id`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
+
+## Using BoxMOT with other object detection models
+
+BoxMOT can be used with any object detection model that outputs bounding boxes. The bounding box data should be formatted as a list of lists, where each inner list represents a detection and contains the following elements:
+
+- \`xmin\`: The x-coordinate of the top-left corner of the bounding box.
+- \`ymin\`: The y-coordinate of the top-left corner of the bounding box.
+- \`xmax\`: The x-coordinate of the bottom-right corner of the bounding box.
+- \`ymax\`: The y-coordinate of the bottom-right corner of the bounding box.
+- \`confidence\`: The confidence score of the detection.
+- \`class_id\`: The ID of the class the object belongs to.
+
+Here's a minimal example of how to format the detections and use a tracker:
+
+\`\`\`python
+from boxmot.tracker_zoo import create_tracker
+from boxmot.motion.kalman_filters.xyah_kf import XyahKalmanFilter
+
+# Format detections
+detections = [
+    [100, 100, 200, 200, 0.9, 0],  # Example detection
+    [300, 150, 400, 250, 0.8, 1],  # Another example detection
+]
+
+# Create tracker
+tracker = create_tracker(
+    "strongsort",
+    XyahKalmanFilter(),
+    "cpu",
+    False,
+    False,
+    None,
+    None,
+)
+
+# Update tracker with detections
+tracks = tracker.update_with_detections(detections)
+
+# Process tracks
+for track in tracks:
+    print(track.track_id, track.tlbr)
+\`\`\`
+
+
 ## Contributors
 
-<a href="https://github.com/mikel-brostrom/yolo_tracking/graphs/contributors ">
-  <img src="https://contrib.rocks/image?repo=mikel-brostrom/yolo_tracking" />
+
+<a href="https://github.com/beichen-google/boxmot/graphs/contributors ">
+  <img src="https://contrib.rocks/image?repo=beichen-google/boxmot" />
 </a>
 
 ## Contact
 
-For Yolo tracking bugs and feature requests please visit [GitHub Issues](https://github.com/mikel-brostrom/yolo_tracking/issues).
+For Yolo tracking bugs and feature requests please visit [GitHub Issues](https://github.com/beichen-google/boxmot/issues).
 For business inquiries or professional support requests please send an email to: box-mot@outlook.com
